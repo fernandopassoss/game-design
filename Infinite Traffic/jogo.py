@@ -1,17 +1,20 @@
-import pygame
+import pygame 
+from random import randint
 pygame.init()
 
-x = 500
-y = 450
+x = 425  
+y = 150
 
-posicao_x = 375
-posicao_y = 450
+posicao_x = 425
+posicao_y = 1000
+posicao_y_1 = 1000
+posicao_y_2 = 1000
 
 
 velocidade = 20
 velocidade_outros = 30
 
-fundo = pygame.image.load('imagens/background.jpg')
+fundo = pygame.image.load('imagens/background.png')
 
 carro = pygame.image.load('imagens/carro_principal.png')
 carro = pygame.transform.scale(carro, (165, 350))
@@ -43,7 +46,7 @@ carro9 = pygame.transform.scale(carro9, (165, 350))
 carro10 = pygame.image.load('imagens/carro10.png')
 carro10 = pygame.transform.scale(carro10, (165, 350))
 
-janela = pygame.display.set_mode((900, 1000))
+janela = pygame.display.set_mode((1000, 1000))
 pygame.display.set_caption("INFINITE TRAFFIC")
 
 janela_aberta = True
@@ -65,24 +68,29 @@ while janela_aberta:
     if comandos[pygame.K_DOWN]:
         y += velocidade
 
-    if comandos[pygame.K_LEFT]:
+    if comandos[pygame.K_LEFT] and x>=95 : # So pode mover para esquerda ate 95px
         x -= velocidade
 
-    if comandos[pygame.K_RIGHT]:
+    if comandos[pygame.K_RIGHT] and x<=725: #So pode mover para direita ate 725px
         x += velocidade
     
-    if posicao_y <= -350:
-        posicao_y = 1000
+    if (posicao_y <= -350) and  (posicao_y_1 <= -350) and (posicao_y_2 <= -350):
+        posicao_y = randint(800, 2000)
+        posicao_y_1 = randint(800, 2000)
+        posicao_y_2 = randint(800,2000)
+
 
     posicao_y -= velocidade_outros
+    posicao_y_1 -= velocidade_outros +2
+    posicao_y_2 -= velocidade_outros +10
 
     # Atualiza a janela
     janela.blit(fundo, (0,0))
     janela.blit(carro, (x,y))
 
     janela.blit(carro1, (posicao_x, posicao_y))
-    janela.blit(carro2, (posicao_x - 300, posicao_y))
-    janela.blit(carro4, (posicao_x + 300, posicao_y))
+    janela.blit(carro2, (posicao_x - 300, posicao_y_1))
+    janela.blit(carro4, (posicao_x + 300, posicao_y_2))
 
     pygame.display.update()
 
