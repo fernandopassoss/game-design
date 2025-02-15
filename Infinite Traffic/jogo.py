@@ -75,9 +75,9 @@ while janela_aberta:
         x += velocidade
     
     if (posicao_y <= -350) and (posicao_y_1 <= -350) and (posicao_y_2 <= -350):
-        posicao_y = randint(800, 2000)
-        posicao_y_1 = randint(800, 2000)
-        posicao_y_2 = randint(800, 2000)
+        posicao_y = randint(800, 1000)
+        posicao_y_1 = randint(1400, 2000)
+        posicao_y_2 = randint(2400, 3000)
 
     if timer < 20:
         timer += 1
