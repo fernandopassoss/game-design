@@ -74,10 +74,25 @@ while janela_aberta:
     if comandos[pygame.K_RIGHT] and x <= 725:
         x += velocidade
     
-    if (posicao_y <= -350) and (posicao_y_1 <= -350) and (posicao_y_2 <= -350):
-        posicao_y = randint(800, 1000)
-        posicao_y_1 = randint(1400, 2000)
-        posicao_y_2 = randint(2400, 3000)
+ #           verifica a colisao
+    if ((x + 80 > posicao_x and y + 180 > posicao_y) ):
+        y = 1200
+
+    if ((x - 80 < posicao_x - 300 and y + 180 > posicao_y)):
+        y = 1200
+
+    if ((x + 80 > posicao_x - 136 and y + 180 > posicao_y_2))and((x - 80 < posicao_x - 136 and y + 180 > posicao_y_2)):
+        y = 1200
+
+    if (posicao_y <= -80):
+        pos_y = randint(800,1000)
+
+    if (posicao_y_1 <= -80):
+        posicao_y_1 = randint(1200, 2000)
+
+    if (posicao_y_2 <= -80):
+        posicao_y_2 = randint(2200, 3000)
+
 
     if timer < 20:
         timer += 1
