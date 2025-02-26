@@ -96,15 +96,15 @@ while janela_aberta:
 
     if (x < posicao_x - 300 + 165 and x + 165 > posicao_x - 300 and 
     y < posicao_y_1 + 350 and y + 350 > posicao_y_1):
-        y = 1200
-        posicao_y= randint(1500, 2500)
+        vidas = vidas - 1
+        telaPerda(janela)
+        posicao_y_1= randint(1200, 2500)
 
     if (x < posicao_x + 300 + 165 and x + 165 > posicao_x + 300 and 
     y < posicao_y_2 + 350 and y + 350 > posicao_y_2):
-        y = 1200
-        posicao_y= randint(1700, 2700)
-
-
+        vidas = vidas - 1
+        telaPerda(janela)
+        posicao_y_2= randint(1200, 2700)
 
 
     if (posicao_y <= -180):
