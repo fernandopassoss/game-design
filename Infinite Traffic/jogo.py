@@ -1,19 +1,49 @@
 import pygame 
 from random import randint
+import emoji
+
+
+def telaPerda(janela):
+    pygame.draw.rect(janela, (0, 0, 0), pygame.Rect(250, 350, 500, 300))  
+    font = pygame.font.SysFont('PressStart2P.ttf', 50)
+    texto = font.render('Você perdeu uma Vida!', True, (255, 255, 255))
+    gameOver = font.render('Game Over!', True, (255, 255, 255))
+    if vidas == 2:
+        emoji = pygame.image.load('imagens/duasVidas.png')  
+        emoji = pygame.transform.scale(emoji, (250, 250))
+    if vidas == 1:
+        emoji = pygame.image.load('imagens/umaVida.png')  
+        emoji = pygame.transform.scale(emoji, (250, 250))
+
+    if vidas == 0:
+        janela.blit(gameOver, (400,475))
+        pygame.display.update()
+        pygame.time.wait(2000)
+        pygame.quit()
+
+    janela.blit(texto, (300, 420)) 
+    janela.blit(emoji, (375, 315))   
+    pygame.display.update()
+    pygame.time.wait(5000)
+    
+    
+
+
 pygame.init()
 
+vidas = 3
 x = 425  
 y = 150
 
 posicao_x = 425
-posicao_y = 800
-posicao_y_1 = 800
-posicao_y_2 = 800
+posicao_y = 1500
+posicao_y_1 = 1200
+posicao_y_2 = 1000
 timer = 0
 tempo_segundo = 0 
 
-velocidade = 20
-velocidade_outros = 30
+velocidade = 15
+velocidade_outros = 15
 
 fundo = pygame.image.load('imagens/background.png')
 
@@ -29,23 +59,6 @@ carro2 = pygame.transform.scale(carro2, (165, 350))
 carro4 = pygame.image.load('imagens/carro4.png')
 carro4 = pygame.transform.scale(carro4, (165, 350))
 
-carro5 = pygame.image.load('imagens/carro5.png')
-
-carro6 = pygame.image.load('imagens/carro6.png')
-carro6 = pygame.transform.scale(carro6, (165, 350))
-
-carro7 = pygame.image.load('imagens/carro7.png')
-carro7 = pygame.transform.scale(carro7, (165, 350))
-
-carro8 = pygame.image.load('imagens/carro8.png')
-carro8 = pygame.transform.scale(carro8, (165, 350))
-
-carro9 = pygame.image.load('imagens/carro9.png')
-carro9 = pygame.transform.scale(carro9, (165, 350))
-
-carro10 = pygame.image.load('imagens/carro10.png')
-carro10 = pygame.transform.scale(carro10, (165, 350))
-
 font = pygame.font.SysFont('PressStart2P.ttf', 60)
 janela = pygame.display.set_mode((1000, 1000))
 pygame.display.set_caption("INFINITE TRAFFIC")
@@ -53,7 +66,7 @@ pygame.display.set_caption("INFINITE TRAFFIC")
 janela_aberta = True
 
 while janela_aberta:
-    pygame.time.delay(50)
+    pygame.time.delay(20)
 
     # Verificação de eventos ()
     for event in pygame.event.get():
@@ -74,23 +87,33 @@ while janela_aberta:
     if comandos[pygame.K_RIGHT] and x <= 725:
         x += velocidade
     
- #           verifica a colisao
-    if ((x + 80 > posicao_x and y + 180 > posicao_y) ):
-        y = 1200
+ #verifica a colisao
+    if (x < posicao_x + 165 and x + 165 > posicao_x )and( y < posicao_y + 350 and y + 350 > posicao_y):
+        vidas = vidas - 1
+        telaPerda(janela)
+    
+        posicao_y= randint(1200, 2000)
 
-    if ((x - 80 < posicao_x - 300 and y + 180 > posicao_y)):
+    if (x < posicao_x - 300 + 165 and x + 165 > posicao_x - 300 and 
+    y < posicao_y_1 + 350 and y + 350 > posicao_y_1):
         y = 1200
+        posicao_y= randint(1500, 2500)
 
-    if ((x + 80 > posicao_x - 136 and y + 180 > posicao_y_2))and((x - 80 < posicao_x - 136 and y + 180 > posicao_y_2)):
+    if (x < posicao_x + 300 + 165 and x + 165 > posicao_x + 300 and 
+    y < posicao_y_2 + 350 and y + 350 > posicao_y_2):
         y = 1200
+        posicao_y= randint(1700, 2700)
 
-    if (posicao_y <= -80):
+
+
+
+    if (posicao_y <= -180):
         pos_y = randint(800,1000)
 
-    if (posicao_y_1 <= -80):
+    if (posicao_y_1 <= -180):
         posicao_y_1 = randint(1200, 2000)
 
-    if (posicao_y_2 <= -80):
+    if (posicao_y_2 <= -180):
         posicao_y_2 = randint(2200, 3000)
 
 
